@@ -5,17 +5,18 @@ A lightweight Retrieval-Augmented Generation (RAG) project that answers coffee b
 ## Architecture
 
 ```
-Question → Embed (nomic-embed-text) → Retrieve from ChromaDB → Augment prompt → Generate (Llama 3)
+Question → Embed (nomic-embed-text) → Retrieve from ChromaDB → Augment prompt → Generate (Phi-4 Mini)
 ```
 
 ```
 coffee-rag/
 ├── data/
 │   ├── documents/          # Your coffee knowledge base (.md, .txt files)
-│   │   ├── 01_brewing_methods.md
-│   │   ├── 02_troubleshooting.md
-│   │   ├── 03_beans_and_origins.md
-│   │   └── 04_grind_guide.md
+│   │   ├── brewing_methods.md
+│   │   ├── troubleshooting.md
+│   │   ├── bean_origins.md
+│   │   ├── grind_guide.md
+│   │   └── recipes.md
 │   └── chroma_db/          # Vector database (auto-generated)
 ├── src/
 │   ├── config.py           # All settings in one place
@@ -98,7 +99,7 @@ All settings live in `src/config.py`:
 
 | Setting | Default | Description |
 |---------|---------|-------------|
-| `LLM_MODEL` | `llama3` | Ollama model for generation |
+| `LLM_MODEL` | `phi4-mini` | Ollama model for generation |
 | `EMBEDDING_MODEL` | `nomic-embed-text` | Ollama model for embeddings |
 | `CHUNK_SIZE` | `500` | Characters per document chunk |
 | `CHUNK_OVERLAP` | `100` | Overlap between chunks |
@@ -106,9 +107,10 @@ All settings live in `src/config.py`:
 
 ## Next Steps / Ideas
 
+- [ ] Add a scraper to pull content from coffee blogs or Reddit
 - [ ] Implement re-ranking (e.g., with a cross-encoder) for better retrieval
 - [ ] Add chat history / multi-turn conversation support
 - [ ] Experiment with different chunk sizes and overlap
-- [ ] Try different models (Mistral, Phi-3, Gemma) and compare quality
+- [ ] Try different models (Mistral, Qwen 2.5, Gemma 3) and compare quality
 - [ ] Add metadata filtering (e.g., "only search brewing method docs")
 - [ ] Build a recipe database with structured data alongside the RAG
